@@ -1,0 +1,3 @@
+#channelname +o @188.226.251.4
+#channelname +v @127.0.0.1
+#channelname +o thisismynickname
