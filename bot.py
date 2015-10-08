@@ -8,12 +8,16 @@ import ConfigParser
 
 class Botje(irc.bot.SingleServerIRCBot):
     def __init__(self, channels, nickname, server, port=6667):
+        print server
+        print port
+
         irc.bot.SingleServerIRCBot.__init__(self, [(server, port)], nickname, "FreeOpsForEverybody")
         self.channels = channels
 
     def on_welcome(self, c, e):
         for chan in self.channels:
-            c.join(chan)
+           c.join(chan)
+        # c.join("#hatstack")
 
     def on_join(self, c, e):
         nick, address = e.source.split('!')
@@ -48,10 +52,10 @@ def main():
     c = ConfigParser.RawConfigParser()   
     c.read("config.ini")    
 
-    server = c.get("connection","server")
-    port = c.get("connection","port")
-    nickname = c.get("connection","nickname")
-    channels = c.get("connection","channels").split()
+    server = str(c.get("connection","server"))
+    port = int(c.get("connection","port"))
+    nickname = str(c.get("connection","nickname"))
+    channels = str(c.get("connection","channels")).split()
 
     bot = Botje(channels, nickname, server, port)
     bot.start()
